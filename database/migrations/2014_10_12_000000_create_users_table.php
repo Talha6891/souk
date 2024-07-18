@@ -28,7 +28,7 @@ return new class extends Migration
             $table->string('iban_number', 40);
             $table->string('referral_code', 50)->nullable();
             $table->rememberToken();
-            $table->string('profile_photo_path', 5120)->nullable(); // Consider reducing this length if possible
+            $table->string('profile_photo_path', 5120)->nullable();
             $table->foreignId('country_id')->constrained('countries')->onDelete('cascade');
             $table->timestamps();
         });

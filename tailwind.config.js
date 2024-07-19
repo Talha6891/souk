@@ -56,7 +56,7 @@ export default {
                 'body':                                                 colors.slate[800],
                 'body-bg':                                              colors.slate[100],
                 'body-bordered':                                        colors.white,
-                
+
                 //sidebar light
                 'vertical-menu':                                        colors.white,
                 'vertical-menu-border':                                 colors.slate[200],
@@ -80,7 +80,7 @@ export default {
                 'vertical-menu-sub-item-dark':                          colors.slate[500],
                 'vertical-menu-sub-item-hover-dark':                    colors.blue[500],
                 'vertical-menu-sub-item-active-dark':                   colors.blue[500],
-                
+
                 //sidebar brand
                 'vertical-menu-brand':                                  colors.blue[900],
                 'vertical-menu-border-brand':                           colors.blue[900],
@@ -92,7 +92,7 @@ export default {
                 'vertical-menu-sub-item-brand':                         "#a4bbfd",
                 'vertical-menu-sub-item-hover-brand':                   colors.blue[50],
                 'vertical-menu-sub-item-active-brand':                  colors.blue[50],
-                
+
                 //sidebar modern
                 'vertical-menu-to-modern':                              colors.blue[900],
                 'vertical-menu-form-modern':                            colors.green[900],
@@ -105,29 +105,29 @@ export default {
                 'vertical-menu-sub-item-modern':                        "rgba(255, 255, 255, 0.50)",
                 'vertical-menu-sub-item-hover-modern':                  colors.white,
                 'vertical-menu-sub-item-active-modern':                 colors.white,
-                
+
                 //TOPBAR
                 'topbar':                                                 colors.white,
                 'topbar-border':                                          colors.slate[200],
                 'topbar-item':                                            colors.slate[700],
                 'topbar-item-hover':                                      colors.slate[800],
                 'topbar-item-bg-hover':                                   colors.slate[100],
-                
+
                 'topbar-dark':                                            colors.slate[900],
                 'topbar-border-dark':                                     colors.slate[700],
                 'topbar-item-dark':                                       colors.slate[400],
                 'topbar-item-hover-dark':                                 colors.slate[100],
                 'topbar-item-bg-hover-dark': colors.slate[800],
-                
+
                 'topbar-brand':                                            colors.blue[900],
                 'topbar-border-brand':                                     colors.blue[800],
                 'topbar-item-brand':                                       "#a4bbfd",
                 'topbar-item-hover-brand':                                 colors.white,
                 'topbar-item-bg-hover-brand':                              "#224097",
-                
+
                 'topbar-modern':                                          colors.white,
-                
-                
+
+
                 custom: {
                     50: colors.blue[50],
                     100: colors.blue[100],
@@ -237,7 +237,7 @@ export default {
                     900: "#070C12",
                     950: "#030507"
                 },
-                
+
             },
             spacing: {
                 'header':                                               '4.375rem', // 70px

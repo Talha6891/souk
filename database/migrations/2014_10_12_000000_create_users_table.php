@@ -27,10 +27,12 @@ return new class extends Migration
             $table->string('account_title', 100);
             $table->string('iban_number', 40);
             $table->string('referral_code', 50)->nullable();
+            $table->boolean('verified')->default(0);
             $table->rememberToken();
             $table->string('profile_photo_path', 5120)->nullable();
             $table->foreignId('country_id')->constrained('countries')->onDelete('cascade');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -40,7 +40,7 @@
                                     <div class="mb-3">
                                         <x-label for="email" value="{{ __('Email') }}" />
                                         <x-input id="email" type="email" name="email" :value="old('email')" required
-                                            autocomplete="username" placeholder="Enter valid email" />
+                                            autocomplete="username" value placeholder="Enter valid email" />
                                         <x-input-error for="email" />
                                     </div>
 
@@ -98,14 +98,6 @@
                                     </div>
                                 </div>
 
-                                <div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
-                                    <div class="mb-3">
-                                        <x-label for="store_name" value="{{ __('Store Name') }}" />
-                                        <x-input id="store_name" type="text" name="store_name" :value="old('store_name')"
-                                            required placeholder="Enter store name" />
-                                        <x-input-error for="store_name" />
-                                    </div>
-
                                     <div class="mb-3">
                                         <x-label for="account_title" value="{{ __('Account Title') }}" />
                                         <x-input id="account_title" type="text" name="account_title" :value="old('account_title')"
@@ -121,6 +113,14 @@
                                             required placeholder="Enter IBAN number" />
                                         <x-input-error for="iban_number" />
                                     </div>
+
+                                    <div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
+                                        <div class="mb-3">
+                                            <x-label for="store_name" value="{{ __('Store Name') }}" />
+                                            <x-input id="store_name" type="text" name="store_name" :value="old('store_name')"
+                                                     required placeholder="Enter store name" />
+                                            <x-input-error for="store_name" />
+                                        </div>
 
                                     <div class="mb-3">
                                         <label for="referral_code"

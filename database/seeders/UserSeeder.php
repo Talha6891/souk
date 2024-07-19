@@ -32,6 +32,7 @@ class UserSeeder extends Seeder
                 'account_title' => 'Account Title 1',
                 'iban_number' => 'PK12345678901234567890123456',
                 'referral_code' => 'REF123',
+                'verified' => '1',
                 'profile_photo_path' => null,
             ],
             [
@@ -51,6 +52,7 @@ class UserSeeder extends Seeder
                 'account_title' => 'Account Title 2',
                 'iban_number' => 'PK09876543210987654321098765',
                 'referral_code' => null,
+                'verified' => '1',
                 'profile_photo_path' => null,
             ],
             [
@@ -70,6 +72,7 @@ class UserSeeder extends Seeder
                 'account_title' => 'Account Title 3',
                 'iban_number' => 'PK11223344556677889900112233',
                 'referral_code' => null,
+                'verified' => '0',
                 'profile_photo_path' => null,
             ],
         ]);

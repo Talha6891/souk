@@ -26,7 +26,7 @@ class UserController extends Controller
      */
     public function index() : View
     {
-        $users = User::with('country')->simplePaginate(10);
+        $users = User::with('country')->paginate(10);
         $breadcrumbs = [
             ['url' => route('dashboard'), 'title' => 'Home'],
             ['url' => route('users.index'), 'title' => 'Users'],

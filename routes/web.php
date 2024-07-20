@@ -4,7 +4,8 @@ use App\Http\Controllers\RouteController;
 use App\Http\Controllers\TailwickController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\WarehouseController;
+use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\RoleController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,6 +26,10 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
 
     // User
     Route::resource('users', UserController::class);
+    // Permission
+    Route::resource('permissions', PermissionController::class)->except('show');
+    //Role
+    Route::resource('roles', RoleController::class);
     // Warehouse
     Route::get("{any}", [RouteController::class, 'routes']);
 });

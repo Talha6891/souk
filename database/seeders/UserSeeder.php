@@ -81,6 +81,8 @@ class UserSeeder extends Seeder
             $user = collect($user);
             $newUser = User::create($user->except('role')->toArray());
             $newUser->assignRole($user['role']);
+            $token = $newUser->createToken('token')->plainTextToken;
+
         });
     }
 }

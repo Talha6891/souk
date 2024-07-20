@@ -23,15 +23,15 @@ class RoleSeeder extends Seeder
         foreach ($roles as $role) {
             Role::create([
                 'name' => $role,
-                'guard_name' => 'web',
+                'guard_name' => 'sanctum',
             ]);
         }
 
-        $superAdminWeb = Role::where(['name' => 'super-admin', 'guard_name' => 'web'])->firstOrFail();
-        $superAdminWeb->givePermissionTo(Permission::where('guard_name', 'web')->get());
+        $superAdminSanctum = Role::where(['name' => 'super-admin', 'guard_name' => 'sanctum'])->firstOrFail();
+        $superAdminSanctum->givePermissionTo(Permission::where('guard_name', 'sanctum')->get());
 
-        $adminWeb = Role::where(['name' => 'admin', 'guard_name' => 'web'])->firstOrFail();
-        $adminWeb->givePermissionTo([
+        $adminSanctum = Role::where(['name' => 'admin', 'guard_name' => 'sanctum'])->firstOrFail();
+        $adminSanctum->givePermissionTo([
             // user
             'user index',
             'user create',
@@ -51,10 +51,11 @@ class RoleSeeder extends Seeder
             'menu role_permission',
             'menu role_permission_permissions',
             'menu role_permission_roles',
+            'menu database_backup',
         ]);
 
-        $userWeb = Role::where(['name' => 'user', 'guard_name' => 'web'])->firstOrFail();
-        $userWeb->givePermissionTo([
+        $userSanctum = Role::where(['name' => 'user', 'guard_name' => 'sanctum'])->firstOrFail();
+        $userSanctum->givePermissionTo([
             // user
             'user index',
             'user update',
@@ -63,4 +64,5 @@ class RoleSeeder extends Seeder
             'menu users_list',
         ]);
     }
+
 }

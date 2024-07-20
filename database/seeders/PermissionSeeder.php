@@ -70,18 +70,19 @@ class PermissionSeeder extends Seeder
             ['name' => 'customerRequest show', 'module_name' => 'customerRequest'],
         ]);
 
-        $web = collect([]);
+        $sanctum = collect([]);
 
-        $permissions->map(function ($permission) use ($web) {
-            $web->push([
+        $permissions->map(function ($permission) use ($sanctum) {
+            $sanctum->push([
                 'name' => $permission['name'],
                 'module_name' => $permission['module_name'],
-                'guard_name' => 'web',
+                'guard_name' => 'sanctum',
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
         });
 
-        Permission::insert($web->toArray());
+        Permission::insert($sanctum->toArray());
     }
+
 }

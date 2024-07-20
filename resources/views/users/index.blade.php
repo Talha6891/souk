@@ -20,23 +20,25 @@
                        {{-- search, add customer and belete button start --}}
                        <div class="flex flex-col items-start justify-between gap-5 mb-5 md:flex-row md:items-center">
                         <div class="relative md:w-3/6">
+                            <form id="searchForm" method="get" action="{{ route('users.index') }}">
                             <input type="text" id="searchInput"
                                 class="ltr:pl-8 rtl:pr-8 search form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200"
-                                placeholder="Search for ..." autocomplete="off" />
+                                placeholder="Search for ..." autocomplete="off" name="q" value="{{ request()->q }}" />
                             <i data-lucide="search"
                                 class="inline-block size-4 absolute ltr:left-2.5 rtl:right-2.5 top-2.5 text-slate-500 dark:text-zink-200 fill-slate-100 dark:fill-zink-600"></i>
+                            </form>
                         </div>
                         @can('user create')
                             <div class="flex space-x-2 md:ml-auto">
                                 <a href="{{ route('users.create') }}"
                                     class="text-white btn bg-custom-500 border-custom-500 hover:text-white hover:bg-custom-600 hover:border-custom-600 focus:text-white focus:bg-custom-600 focus:border-custom-600 focus:ring focus:ring-custom-100 active:text-white active:bg-custom-600 active:border-custom-600 active:ring active:ring-custom-100 dark:ring-custom-400/20 add-btn"
                                     id="create-btn">
-                                    <i class="align-bottom ri-add-line me-1"></i> Add Customer
+                                    <i class="align-bottom ri-add-line me-1"></i> Add User
                                 </a>
                             </div>
                         @endcan
                     </div>
-                    {{-- search, add customer and belete button start --}}
+                    {{-- search, add customer and belete button end --}}
 
                     {{-- table start --}}
                     <div class="overflow-x-auto">
@@ -70,7 +72,7 @@
                             {{-- table heading end --}}
 
                             <tbody class="list form-check-all">
-                                @foreach ($users as $user)
+                                @forelse($users as $user)
                                     <tr>
                                         <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 first_name">
                                             {{ Str::limit($user->first_name . ' ' . $user->last_name ?? ' ', 20) }}</td>
@@ -162,7 +164,9 @@
                                             </div>
                                         </td>
                                     </tr>
-                                @endforeach
+                                    @empty
+                                    <tr>Not Found</tr>
+                                @endforelse
                             </tbody>
                         </table>
                     </div>
@@ -185,30 +189,6 @@
         <script src="{{ URL::asset('build/libs/sweetalert2/sweetalert2.min.js') }}"></script>
         <!-- App js -->
         <script src="{{ URL::asset('build/js/app.js') }}"></script>
-        {{-- search implementation start --}}
-        <script>
-           document.addEventListener('DOMContentLoaded', function() {
-    const searchInput = document.getElementById('searchInput');
-
-    searchInput.addEventListener('input', function() {
-        const searchTerm = searchInput.value.trim().toLowerCase();
-        const rows = document.querySelectorAll('#customerTable tbody tr');
-
-        rows.forEach(row => {
-            const columns = row.textContent.toLowerCase();
-            row.style.display = columns.includes(searchTerm) ? '' : 'none';
-        });
-
-        // Show no result message if no rows are visible
-        const noResult = document.querySelector('.noresult');
-        const visibleRows = Array.from(rows).some(row => row.style.display !== 'none');
-        noResult.style.display = visibleRows ? 'none' : 'block';
-    });
-});
-
-        </script>
-        {{-- search implementation end --}}
-
         {{--  delete user  start --}}
         <script>
             function sweetAlertDelete(event, formId) {

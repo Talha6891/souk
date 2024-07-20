@@ -4,6 +4,7 @@
 @endsection
 
 @section('content')
+
     <body
         class="flex items-center justify-center min-h-screen px-4 py-16 bg-cover bg-auth-pattern dark:bg-auth-pattern-dark dark:text-zink-100 font-public">
         <div class="mb-0 border-none shadow-none xl:w-2/3 card bg-white/70 dark:bg-zink-500/70">
@@ -47,7 +48,8 @@
                                     <div class="mb-3">
                                         <x-label for="whatsapp_no" value="{{ __('WhatsApp Number') }}" />
                                         <x-input id="whatsapp_no" type="text" name="whatsapp_no" :value="old('whatsapp_no')"
-                                            required minlength="10" maxlength="15" placeholder="Enter WhatsApp number :  +92 3039243654" />
+                                            required minlength="10" maxlength="15"
+                                            placeholder="Enter WhatsApp number :  +92 3039243654" />
                                         <x-input-error for="whatsapp_no" />
                                     </div>
                                 </div>
@@ -98,29 +100,29 @@
                                     </div>
                                 </div>
 
+                                <div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
                                     <div class="mb-3">
                                         <x-label for="account_title" value="{{ __('Account Title') }}" />
                                         <x-input id="account_title" type="text" name="account_title" :value="old('account_title')"
                                             required placeholder="Enter account title" />
                                         <x-input-error for="account_title" />
                                     </div>
-                                </div>
 
-                                <div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
                                     <div class="mb-3">
                                         <x-label for="iban_number" value="{{ __('IBAN Number') }}" />
                                         <x-input id="iban_number" type="text" name="iban_number" :value="old('iban_number')"
                                             required placeholder="Enter IBAN number" />
                                         <x-input-error for="iban_number" />
                                     </div>
+                                </div>
 
-                                    <div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
-                                        <div class="mb-3">
-                                            <x-label for="store_name" value="{{ __('Store Name') }}" />
-                                            <x-input id="store_name" type="text" name="store_name" :value="old('store_name')"
-                                                     required placeholder="Enter store name" />
-                                            <x-input-error for="store_name" />
-                                        </div>
+                                <div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
+                                    <div class="mb-3">
+                                        <x-label for="store_name" value="{{ __('Store Name') }}" />
+                                        <x-input id="store_name" type="text" name="store_name" :value="old('store_name')"
+                                            required placeholder="Enter store name" />
+                                        <x-input-error for="store_name" />
+                                    </div>
 
                                     <div class="mb-3">
                                         <label for="referral_code"
@@ -133,23 +135,24 @@
                                 </div>
 
                                 @php
-                                $countries = App\Models\Country::all();
-                            @endphp
-                            <div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
-                                <div class="relative mb-3">
-                                    <x-label for="country_id" value="{{ __('Select Country') }}" />
-                                    <div class="mb-3">
-                                        <select id="country_id" name="country_id" class="form-select custom-select">
-                                            <option value="">{{ __('Select Country') }}</option>
-                                            @foreach ($countries as $country)
-                                                <option value="{{ $country->id }}" data-code="{{ strtolower($country->code) }}">
-                                                    {{ $country->name }}
-                                                </option>
-                                            @endforeach
-                                        </select>
+                                    $countries = App\Models\Country::all();
+                                @endphp
+                                <div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
+                                    <div class="relative mb-3">
+                                        <x-label for="country_id" value="{{ __('Select Country') }}" />
+                                        <div class="mb-3">
+                                            <select id="country_id" name="country_id" class="form-select custom-select">
+                                                <option value="">{{ __('Select Country') }}</option>
+                                                @foreach ($countries as $country)
+                                                    <option value="{{ $country->id }}"
+                                                        data-code="{{ strtolower($country->code) }}">
+                                                        {{ $country->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
 
 
@@ -200,31 +203,31 @@
         </div>
 
         @push('scripts')
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                const selectElement = document.querySelector('.custom-select');
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    const selectElement = document.querySelector('.custom-select');
 
-                selectElement.addEventListener('change', function() {
-                    const selectedOption = selectElement.options[selectElement.selectedIndex];
-                    const countryCode = selectedOption.getAttribute('data-code');
+                    selectElement.addEventListener('change', function() {
+                        const selectedOption = selectElement.options[selectElement.selectedIndex];
+                        const countryCode = selectedOption.getAttribute('data-code');
 
-                    if (countryCode) {
-                        // Use Laravel's asset() helper to get the correct URL
-                        const flagUrl = `${window.location.origin}/build/images/flags/${countryCode}.svg`;
-                        selectElement.style.backgroundImage = `url(${flagUrl})`;
-                        selectElement.style.backgroundRepeat = 'no-repeat';
-                        selectElement.style.backgroundPosition = 'left center';
-                        selectElement.style.backgroundSize = '20px 15px';
-                        selectElement.style.paddingLeft = '30px'; // Adjust padding to make space for the flag
-                    } else {
-                        selectElement.style.backgroundImage = 'none';
-                        selectElement.style.paddingLeft = 'initial';
-                    }
+                        if (countryCode) {
+                            // Use Laravel's asset() helper to get the correct URL
+                            const flagUrl = `${window.location.origin}/build/images/flags/${countryCode}.svg`;
+                            selectElement.style.backgroundImage = `url(${flagUrl})`;
+                            selectElement.style.backgroundRepeat = 'no-repeat';
+                            selectElement.style.backgroundPosition = 'left center';
+                            selectElement.style.backgroundSize = '20px 15px';
+                            selectElement.style.paddingLeft = '30px'; // Adjust padding to make space for the flag
+                        } else {
+                            selectElement.style.backgroundImage = 'none';
+                            selectElement.style.paddingLeft = 'initial';
+                        }
+                    });
+
+                    // Trigger the change event to apply the initial flag
+                    selectElement.dispatchEvent(new Event('change'));
                 });
-
-                // Trigger the change event to apply the initial flag
-                selectElement.dispatchEvent(new Event('change'));
-            });
             </script>
         @endpush
     @endsection

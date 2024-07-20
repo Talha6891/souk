@@ -14,7 +14,7 @@ use Laravel\Jetstream\HasTeams;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, HasProfilePhoto, HasRoles, HasTeams, Notifiable, TwoFactorAuthenticatable, SoftDeletes;
 
@@ -70,6 +70,21 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function scopeWithoutAuthUser($query): mixed
+    {
+        return $query->where('id', '!=', auth()->id());
+    }
+
+    /**
+     * Local scope to exclude super admin
+     * @param $query
+     * @return mixed
+     */
+    public function scopeWithoutSuperAdmin($query): mixed
+    {
+        return $query->where('id', '!=', 1);
+    }
 
     // Define the relationship with the Country model
     public function country(): BelongsTo

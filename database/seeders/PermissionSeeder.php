@@ -45,11 +45,11 @@ class PermissionSeeder extends Seeder
             ['name'=>'menu role_permission_roles', 'module_name'=>'menu'],
             ['name'=>'menu database_backup', 'module_name'=>'menu'],
 
-            ['name' => 'category index', 'module_name' => 'category'],
-            ['name' => 'category create', 'module_name' => 'category'],
-            ['name' => 'category update', 'module_name' => 'category'],
-            ['name' => 'category delete', 'module_name' => 'category'],
-            ['name' => 'category show', 'module_name' => 'category'],
+            ['name' => 'warehouse index', 'module_name' => 'warehouse'],
+            ['name' => 'warehouse create', 'module_name' => 'warehouse'],
+            ['name' => 'warehouse update', 'module_name' => 'warehouse'],
+            ['name' => 'warehouse delete', 'module_name' => 'warehouse'],
+            ['name' => 'warehouse show', 'module_name' => 'warehouse'],
 
             ['name' => 'service index', 'module_name' => 'service'],
             ['name' => 'service create', 'module_name' => 'service'],

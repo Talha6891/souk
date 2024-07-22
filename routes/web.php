@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\WarehouseController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -31,5 +32,6 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     //Role
     Route::resource('roles', RoleController::class);
     // Warehouse
+    Route::resource('warehouses', WarehouseController::class);
     Route::get("{any}", [RouteController::class, 'routes']);
 });

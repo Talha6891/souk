@@ -23,7 +23,7 @@ class RoleController extends Controller
      * @param Request $request
      * @return View
      */
-    public function index(Request $request) : View
+    public function index(Request $request): View
     {
         $breadcrumbs = [
             ['url' => route('dashboard'), 'title' => 'Home'],
@@ -34,14 +34,19 @@ class RoleController extends Controller
         $perPage = $request->get('per_page', 10);
         $sort = $request->get('sort');
 
-        $roles = QueryBuilder::for(Role::class)
+        $query = QueryBuilder::for(Role::class)
             ->allowedSorts(['name', 'created_at'])
-            ->where('name', 'like', "%$q%")
-            ->latest()
+            ->where('name', 'like', "%$q%");
+
+        if (!auth()->user()->hasRole('super-admin')) {
+            $query->where('name', '!=', 'super-admin');
+        }
+
+        $roles = $query->latest()
             ->paginate($perPage)
             ->appends(['per_page' => $perPage, 'q' => $q, 'sort' => $sort]);
 
-        return view('roles.index', compact('breadcrumbs','roles'));
+        return view('roles.index', compact('breadcrumbs', 'roles'));
     }
 
     /**

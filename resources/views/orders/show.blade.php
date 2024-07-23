@@ -10,7 +10,7 @@
         <div class="card-body">
             <form action="javascript:void(0)">
                 <h6 class="my-5 underline text-16">Customer Info:</h6>
-                <div class="grid grid-cols-1 gap-5 xl:grid-cols-12 changeAddress mt-3">
+                <div class="grid grid-cols-1 gap-5 mt-3 xl:grid-cols-12 changeAddress">
 {{-- customer_name--}}
                     <div class="xl:col-span-3">
                         <label for="customer_name" class="inline-block mb-2 text-base font-medium">Customer Name</label>
@@ -62,7 +62,7 @@
 
 
                 <h6 class="my-5 mt-6 underline text-16">Order(s) Info:</h6>
-                <div class="grid grid-cols-1 gap-5 xl:grid-cols-12 mt-3">
+                <div class="grid grid-cols-1 gap-5 mt-3 xl:grid-cols-12">
 
                     <div class="xl:col-span-3">
                         <label for="user_id" class="inline-block mb-2 text-base font-medium">Store Name</label>
@@ -113,13 +113,13 @@
                 <div class="flex justify-end gap-2 mt-5">
                     <a href="{{ route('orders.index') }}"
                             class="text-slate-500 btn bg-slate-200 border-slate-200 hover:text-slate-600 hover:bg-slate-300 hover:border-slate-300 focus:text-slate-600 focus:bg-slate-300 focus:border-slate-300 focus:ring focus:ring-slate-100 active:text-slate-600 active:bg-slate-300 active:border-slate-300 active:ring active:ring-slate-100 dark:bg-zink-600 dark:hover:bg-zink-500 dark:border-zink-600 dark:hover:border-zink-500 dark:text-zink-200 dark:ring-zink-400/50"><i
-                            data-lucide="arrow-left" class="inline-block size-4 mr-1"></i> <span
+                            data-lucide="arrow-left" class="inline-block mr-1 size-4"></i> <span
                             class="align-middle">Reset</span></a>
 
-                    <button type="button"
+                    {{-- <button type="button"
                             class="text-white bg-green-500 border-green-500 btn hover:text-white hover:bg-green-600 hover:border-green-600 focus:text-white focus:bg-green-600 focus:border-green-600 focus:ring focus:ring-green-100 active:text-white active:bg-green-600 active:border-green-600 active:ring active:ring-green-100 dark:ring-green-400/10"><i
-                            data-lucide="download" class="inline-block size-4 mr-1"></i> <span
-                            class="align-middle">Download</span></button>
+                            data-lucide="download" class="inline-block mr-1 size-4"></i> <span
+                            class="align-middle">Download</span></button> --}}
                 </div>
             </form>
         </div>

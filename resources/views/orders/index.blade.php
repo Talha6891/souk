@@ -21,25 +21,40 @@
         <div class="card-body">
 
             {{-- search, add order button start --}}
-            <div class="flex flex-col items-start justify-between gap-5 mb-5 md:flex-row md:items-center">
-                <div class="relative md:w-3/6">
+            <div class="flex flex-col items-start justify-between gap-5 mb-5 md:flex-row md:items-center md:space-x-4">
+                <!-- Search Form -->
+                <div class="relative flex-1 md:w-3/6">
                     <form id="searchForm" method="get" action="{{ route('orders.index') }}">
                         <input type="text" id="searchInput"
-                            class="ltr:pl-8 rtl:pr-8 search form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200"
-                            placeholder="Search for ..." autocomplete="off" name="q" value="{{ request()->q }}" />
+                               class="ltr:pl-8 rtl:pr-8 search form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200 w-full"
+                               placeholder="Search for ..." autocomplete="off" name="q" value="{{ request()->q }}" />
                         <i data-lucide="search"
-                            class="inline-block size-4 absolute ltr:left-2.5 rtl:right-2.5 top-2.5 text-slate-500 dark:text-zink-200 fill-slate-100 dark:fill-zink-600"></i>
+                           class="inline-block size-4 absolute ltr:left-2.5 rtl:right-2.5 top-2.5 text-slate-500 dark:text-zink-200 fill-slate-100 dark:fill-zink-600"></i>
                     </form>
                 </div>
+
+                <!-- Action Buttons -->
+                <div class="flex flex-wrap items-center space-x-2 md:space-x-4">
+                    <select
+                        class="text-white btn bg-green-500 border-green-500 hover:text-white hover:bg-green-600 hover:border-green-600 focus:text-white focus:bg-green-600 focus:border-green-600 focus:ring focus:ring-green-100 active:text-white active:bg-green-600 active:border-green-600 active:ring active:ring-green-100 dark:ring-green-400/20"
+                        id="warehouseSelect">
+                        <option value="">Select Warehouse</option>
+                        @foreach($warehouses as $warehouse)
+                            <option value="{{ $warehouse->id }}">{{ $warehouse->name }}</option>
+                        @endforeach
+                    </select>
+
+                    <button type="button" id="applyButton" class="text-white bg-red-500 border-red-500 btn hover:text-white hover:bg-red-600 hover:border-red-600 focus:text-white focus:bg-red-600 focus:border-red-600 focus:ring focus:ring-red-100 active:text-white active:bg-red-600 active:border-red-600 active:ring active:ring-red-100 dark:ring-custom-400/20">
+                        Apply
+                    </button>
+
                 @can('order create')
-                    <div class="flex space-x-2 md:ml-auto">
                         <a href="{{ route('orders.create') }}"
-                            class="text-white btn bg-custom-500 border-custom-500 hover:text-white hover:bg-custom-600 hover:border-custom-600 focus:text-white focus:bg-custom-600 focus:border-custom-600 focus:ring focus:ring-custom-100 active:text-white active:bg-custom-600 active:border-custom-600 active:ring active:ring-custom-100 dark:ring-custom-400/20 add-btn"
-                            id="create-btn">
+                           class="text-white btn bg-custom-500 border-custom-500 hover:text-white hover:bg-custom-600 hover:border-custom-600 focus:text-white focus:bg-custom-600 focus:border-custom-600 focus:ring focus:ring-custom-100 active:text-white active:bg-custom-600 active:border-custom-600 active:ring active:ring-custom-100 dark:ring-custom-400/20">
                             <i class="align-bottom ri-add-line me-1"></i> Add Order
                         </a>
-                    </div>
-                @endcan
+                    @endcan
+                </div>
             </div>
             {{-- search, add order button end --}}
 
@@ -49,6 +64,12 @@
                     {{-- table heading start --}}
                     <thead class="bg-slate-100 dark:bg-zink-600">
                         <tr>
+                            <th class="px-3.5 py-2.5 font-semibold border-b border-slate-200 dark:border-zink-500"
+                                scope="col" style="width: 50px;">
+                                <input
+                                    class="size-4 border rounded-sm appearance-none cursor-pointer bg-slate-100 border-slate-200 dark:bg-zink-600 dark:border-zink-500 checked:bg-custom-500 checked:border-custom-500 dark:checked:bg-custom-500 dark:checked:border-custom-500 checked:disabled:bg-custom-400 checked:disabled:border-custom-400"
+                                    type="checkbox" id="checkAll" value="option">
+                            </th>
                             <th class="sort px-3.5 py-2.5 font-semibold border-b border-slate-200 dark:border-zink-500 ltr:text-left rtl:text-right"
                                 >#ID
                             </th>
@@ -57,6 +78,9 @@
                             </th>
                             <th class="sort px-3.5 py-2.5 font-semibold border-b border-slate-200 dark:border-zink-500 ltr:text-left rtl:text-right"
                                 data-sort="custom_order_id">Custom Order ID
+                            </th>
+                            <th class="sort px-3.5 py-2.5 font-semibold border-b border-slate-200 dark:border-zink-500 ltr:text-left rtl:text-right"
+                                data-sort="custom_order_id">Warehouse Assigned
                             </th>
                             <th class="sort px-3.5 py-2.5 font-semibold border-b border-slate-200 dark:border-zink-500 ltr:text-left rtl:text-right"
                                 data-sort="customer_name">Customer Name
@@ -78,12 +102,30 @@
                     <tbody class="list form-check-all">
                         @forelse($orders as $order)
                             <tr>
+                                <th class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500" scope="row">
+                                    <input
+                                        class="size-4 border rounded-sm appearance-none cursor-pointer bg-slate-100 border-slate-200 dark:bg-zink-600 dark:border-zink-500 checked:bg-custom-500 checked:border-custom-500 dark:checked:bg-custom-500 dark:checked:border-custom-500 checked:disabled:bg-custom-400 checked:disabled:border-custom-400"
+                                        type="checkbox" name="chk_child">
+                                </th>
                                 <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 custom_order_id">
                                     {{ $order->id }}</td>
                                 <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 custom_order_id">
                                     {{ $order->order_name }}</td>
                                 <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 custom_order_id">
                                     {{ $order->custom_order_id }}</td>
+
+                                <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 status">
+                                    @if ($order->warehouse && $order->warehouse->name)
+                                        <span class="px-2.5 py-0.5 inline-block text-xs font-medium rounded border bg-green-100 border-transparent text-green-500 dark:bg-green-500/20 dark:border-transparent text-uppercase">
+            {{ $order->warehouse->name }}
+        </span>
+                                    @else
+                                        <span class="px-2.5 py-0.5 inline-block text-xs font-medium rounded border bg-red-100 border-transparent text-red-500 dark:bg-red-500/20 dark:border-transparent text-uppercase">
+            {{ __('Not Assigned') }}
+        </span>
+                                    @endif
+                                </td>
+
                                 <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 customer_name">
                                     {{ $order->customer_name }}</td>
                                 <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 contact_no">
@@ -201,4 +243,75 @@
         }
     </script>
     {{-- delete order end --}}
+
+{{-- check all --}}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const checkAll = document.getElementById('checkAll');
+            const checkboxes = document.querySelectorAll('input[name="chk_child"]');
+
+            checkAll.addEventListener('change', function() {
+                checkboxes.forEach(checkbox => {
+                    checkbox.checked = checkAll.checked;
+                });
+            });
+        });
+    </script>
+    {{-- check all end --}}
+
+{{-- specific check update --}}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const applyButton = document.getElementById('applyButton');
+        const warehouseSelect = document.getElementById('warehouseSelect');
+
+        applyButton.addEventListener('click', function() {
+            const selectedWarehouseId = warehouseSelect.value;
+            const selectedOrders = [];
+
+            // Get all checked checkboxes and their corresponding order IDs
+            document.querySelectorAll('input[name="chk_child"]:checked').forEach(checkbox => {
+                const row = checkbox.closest('tr');
+                const orderId = row.querySelector('td.custom_order_id').textContent.trim();
+                selectedOrders.push(orderId);
+            });
+
+            // Check if a warehouse is selected and if there are selected orders
+            if (selectedWarehouseId && selectedOrders.length > 0) {
+                const form = document.createElement('form');
+                form.method = 'POST';
+                form.action = '{{ route('orders.updateWarehouse') }}';
+
+                // CSRF Token
+                const csrfInput = document.createElement('input');
+                csrfInput.type = 'hidden';
+                csrfInput.name = '_token';
+                csrfInput.value = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+                form.appendChild(csrfInput);
+
+                // Warehouse ID
+                const warehouseInput = document.createElement('input');
+                warehouseInput.type = 'hidden';
+                warehouseInput.name = 'warehouse_id';
+                warehouseInput.value = selectedWarehouseId;
+                form.appendChild(warehouseInput);
+
+                // Order IDs
+                selectedOrders.forEach(orderId => {
+                    const ordersInput = document.createElement('input');
+                    ordersInput.type = 'hidden';
+                    ordersInput.name = 'order_ids[]';
+                    ordersInput.value = orderId;
+                    form.appendChild(ordersInput);
+                });
+
+                document.body.appendChild(form);
+                form.submit();
+            } else {
+                alert('Please select a warehouse and/or orders.');
+            }
+        });
+    });
+</script>
+    {{--    end--}}
 @endpush

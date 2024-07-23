@@ -23,6 +23,7 @@ class Order extends Model
         'quantity',
         'total_price',
         'product_id',
+        'warehouse_id'
     ];
 
     public function user() : BelongsTo
@@ -35,9 +36,9 @@ class Order extends Model
         return $this->belongsTo(Country::class);
     }
 
-//    public function product()
-//    {
-//        return $this->belongsTo(Product::class);
-//    }
+    public function warehouse() : BelongsTo
+    {
+        return $this->belongsTo(Warehouse::class);
+    }
 
 }

@@ -24,10 +24,9 @@ return new class extends Migration
             $table->foreignId('country_id')->constrained('countries')->onDelete('cascade');
             $table->integer('quantity');
             $table->decimal('total_price', 15, 2);
-
-            //  need a product foreign key
             $table->string('product_id')->nullable();
             // $table->foreignId('product_id')->constrained('products')->onDelete('cascade');
+            $table->foreignId('warehouse_id')->nullable()->constrained('warehouses')->cascadeOnDelete();
             $table->timestamps();
         });
     }

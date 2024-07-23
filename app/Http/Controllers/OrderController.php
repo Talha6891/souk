@@ -6,6 +6,7 @@ use App\Http\Requests\StoreOrderRequest;
 use App\Models\Country;
 use App\Models\Order;
 use App\Models\User;
+use App\Models\Warehouse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -34,7 +35,7 @@ class OrderController extends Controller
         $sort = $request->get('sort');
 
         $orders = QueryBuilder::for(Order::class)
-            ->allowedSorts(['order_name','custom_order_id', 'customer_name', 'email', 'contact_no', 'city', 'quantity', 'total_price', 'country_id'])
+            ->allowedSorts(['order_name', 'custom_order_id', 'customer_name', 'email', 'contact_no', 'city', 'quantity', 'total_price', 'country_id'])
             ->where(function ($query) use ($q) {
                 $query->where('custom_order_id', 'like', "%$q%")
                     ->orWhere('order_name', 'like', "%$q%")
@@ -45,17 +46,18 @@ class OrderController extends Controller
                     ->orWhere('shipping_address', 'like', "%$q%");
             })
             ->with('country')
+            ->with('warehouse')
             ->latest()
             ->paginate($perPage)
             ->appends(['per_page' => $perPage, 'q' => $q, 'sort' => $sort]);
-
-        return view('orders.index', compact('orders', 'breadcrumbs'));
+        $warehouses = Warehouse::all();
+        return view('orders.index', compact('orders', 'warehouses', 'breadcrumbs'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create() : View
+    public function create(): View
     {
         $breadcrumbs = [
             ['url' => route('dashboard'), 'title' => 'Home'],
@@ -71,7 +73,7 @@ class OrderController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreOrderRequest $request)  : RedirectResponse
+    public function store(StoreOrderRequest $request): RedirectResponse
     {
         Order::create($request->validated());
 
@@ -81,14 +83,14 @@ class OrderController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Order $order) : View
+    public function show(Order $order): View
     {
         $breadcrumbs = [
             ['url' => route('dashboard'), 'title' => 'Home'],
             ['url' => route('orders.index'), 'title' => 'Order Show'],
         ];
-        $order->load('country','user');
-        return view('orders.show', compact('breadcrumbs','order'));
+        $order->load('country', 'user');
+        return view('orders.show', compact('breadcrumbs', 'order'));
     }
 
     /**
@@ -110,10 +112,25 @@ class OrderController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Order $order) : RedirectResponse
+    public function destroy(Order $order): RedirectResponse
     {
         $order->delete();
 
         return to_route('orders.index')->with('message', 'Order deleted successfully.');
+    }
+
+    public function updateWarehouse(Request $request)
+    {
+        $validated = $request->validate([
+            'warehouse_id' => 'required|integer|exists:warehouses,id',
+            'order_ids' => 'required|array',
+            'order_ids.*' => 'integer|exists:orders,id',
+        ]);
+
+        // Update the warehouse_id for the selected orders
+        Order::whereIn('id', $validated['order_ids'])
+            ->update(['warehouse_id' => $validated['warehouse_id']]);
+
+        return to_route('orders.index')->with('message', 'Warehouse updated successfully.');
     }
 }

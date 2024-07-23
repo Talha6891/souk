@@ -57,11 +57,14 @@ class PermissionSeeder extends Seeder
             ['name' => 'service delete', 'module_name' => 'service'],
             ['name' => 'service show', 'module_name' => 'service'],
 
-            ['name' => 'plan index', 'module_name' => 'plan'],
-            ['name' => 'plan create', 'module_name' => 'plan'],
-            ['name' => 'plan update', 'module_name' => 'plan'],
-            ['name' => 'plan delete', 'module_name' => 'plan'],
-            ['name' => 'plan show', 'module_name' => 'plan'],
+            ['name' => 'order index', 'module_name' => 'order'],
+            ['name' => 'order create', 'module_name' => 'order'],
+            ['name' => 'order update', 'module_name' => 'order'],
+            ['name' => 'order delete', 'module_name' => 'order'],
+            ['name' => 'order show', 'module_name' => 'order'],
+            ['name' => 'order import_file', 'module_name' => 'order'],
+            ['name' => 'order export_file', 'module_name' => 'order'],
+
 
             ['name' => 'customerRequest index', 'module_name' => 'customerRequest'],
             ['name' => 'customerRequest create', 'module_name' => 'customerRequest'],

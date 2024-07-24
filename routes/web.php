@@ -38,6 +38,8 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     // Order
     Route::resource('orders', OrderController::class);
     Route::post('/orders/update-warehouse', [OrderController::class, 'updateWarehouse'])->name('orders.updateWarehouse');
+    Route::get('/orders/{id}/invoice', [OrderController::class, 'invoice'])->name('orders.invoice');
+
 
     // Import or Export Orders
     Route::middleware('can:order import_file')

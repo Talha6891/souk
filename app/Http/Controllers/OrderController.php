@@ -12,6 +12,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 use Spatie\QueryBuilder\QueryBuilder;
+use Dompdf\Dompdf;
+use Dompdf\Options;
+
 
 class OrderController extends Controller
 {
@@ -133,4 +136,28 @@ class OrderController extends Controller
 
         return to_route('orders.index')->with('message', 'Warehouse updated successfully.');
     }
+
+
+    public function invoice($id)
+    {
+        $order = Order::with(['user', 'country'])->findOrFail($id);
+
+        $data = [
+            'order' => $order
+        ];
+
+        $html = view('orders.invoice', $data)->render();
+
+        $options = new Options();
+        $options->set('defaultFont', 'Helvetica');
+
+        $dompdf = new Dompdf($options);
+        $dompdf->loadHtml($html);
+        $dompdf->setPaper('A4', 'portrait');
+        $dompdf->render();
+
+        return $dompdf->stream('invoice.pdf');
+    }
+
+
 }

@@ -20,11 +20,11 @@
                 <x-section-border/>
             @endif
 
-            @if (Laravel\Fortify\Features::canUpdateProfileInformation())
+            {{-- @if (Laravel\Fortify\Features::canUpdateProfileInformation())
                 @livewire('profile-bank-details-update-form')
 
                 <x-section-border/>
-            @endif
+            @endif --}}
 
             {{-- @if (Laravel\Fortify\Features::canManageTwoFactorAuthentication())
                 <div class="mt-10 sm:mt-0">

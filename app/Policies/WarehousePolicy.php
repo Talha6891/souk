@@ -102,4 +102,12 @@ class WarehousePolicy
     {
         //
     }
+
+    public function updateOrderStatus(User $user, Warehouse $warehouse): bool
+    {
+        if ($user->can('warehouse-order-status-update')) {
+            return true;
+        }
+        return false;
+    }
 }

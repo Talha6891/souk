@@ -2,6 +2,7 @@
 
 namespace App\Actions\Fortify;
 
+use App\Models\Client;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -25,7 +26,7 @@ class CreateNewUser implements CreatesNewUsers
             'last_name' => ['nullable', 'string', 'max:100'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => $this->passwordRules(),
-            'whatsapp_no' => ['required', 'string', 'unique:users', 'min:10', 'max:15'],
+            'whatsapp_no' => ['required', 'string', 'unique:clients', 'min:10', 'max:15'],
             'city' => ['required', 'string', 'min:1', 'max:100'],
             'address' => ['required', 'string', 'min:1', 'max:255'],
             'bank_name' => ['required', 'string', 'min:1', 'max:100'],
@@ -44,6 +45,13 @@ class CreateNewUser implements CreatesNewUsers
                 'last_name' => $input['last_name'],
                 'email' => $input['email'],
                 'password' => Hash::make($input['password']),
+                'referral_code' => $input['referral_code'],
+
+            ]);
+            $client =  Client::create([
+                'first_name' => $input['first_name'],
+                'last_name' => $input['last_name'],
+                'email' => $input['email'],
                 'whatsapp_no' => $input['whatsapp_no'],
                 'city' => $input['city'],
                 'address' => $input['address'],
@@ -52,10 +60,11 @@ class CreateNewUser implements CreatesNewUsers
                 'store_name' => $input['store_name'],
                 'account_title' => $input['account_title'],
                 'iban_number' => $input['iban_number'],
-                'referral_code' => $input['referral_code'],
                 'country_id' => $input['country_id'],
+                'user_id' => $user->id
             ]);
-            $user->assignRole('user');
+
+            $user->assignRole('client');
             return $user;
         });
     }

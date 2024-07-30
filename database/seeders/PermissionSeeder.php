@@ -50,12 +50,15 @@ class PermissionSeeder extends Seeder
             ['name' => 'warehouse update', 'module_name' => 'warehouse'],
             ['name' => 'warehouse delete', 'module_name' => 'warehouse'],
             ['name' => 'warehouse show', 'module_name' => 'warehouse'],
+            // supervisor status update
+            ['name' => 'warehouse-order-status-update', 'module_name' => 'warehouse'],
 
-            ['name' => 'service index', 'module_name' => 'service'],
-            ['name' => 'service create', 'module_name' => 'service'],
-            ['name' => 'service update', 'module_name' => 'service'],
-            ['name' => 'service delete', 'module_name' => 'service'],
-            ['name' => 'service show', 'module_name' => 'service'],
+
+            ['name' => 'client index', 'module_name' => 'client'],
+            ['name' => 'client create', 'module_name' => 'client'],
+            ['name' => 'client update', 'module_name' => 'client'],
+            ['name' => 'client delete', 'module_name' => 'client'],
+            ['name' => 'client show', 'module_name' => 'client'],
 
             ['name' => 'order index', 'module_name' => 'order'],
             ['name' => 'order create', 'module_name' => 'order'],
@@ -66,11 +69,11 @@ class PermissionSeeder extends Seeder
             ['name' => 'order export_file', 'module_name' => 'order'],
 
 
-            ['name' => 'customerRequest index', 'module_name' => 'customerRequest'],
-            ['name' => 'customerRequest create', 'module_name' => 'customerRequest'],
-            ['name' => 'customerRequest update', 'module_name' => 'customerRequest'],
-            ['name' => 'customerRequest delete', 'module_name' => 'customerRequest'],
-            ['name' => 'customerRequest show', 'module_name' => 'customerRequest'],
+            ['name' => 'employee index', 'module_name' => 'employee'],
+            ['name' => 'employee create', 'module_name' => 'employee'],
+            ['name' => 'employee update', 'module_name' => 'employee'],
+            ['name' => 'employee delete', 'module_name' => 'employee'],
+            ['name' => 'employee show', 'module_name' => 'employee'],
         ]);
 
         $sanctum = collect([]);

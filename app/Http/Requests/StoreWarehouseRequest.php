@@ -24,6 +24,7 @@ class StoreWarehouseRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'min:1', 'max:100'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:warehouses'],
             'contact_no' => ['required', 'string', 'min:10', 'max:15', 'unique:warehouses,contact_no'],
             'city' => ['required', 'string', 'min:1', 'max:100'],
             'address' => ['required', 'string', 'min:1', 'max:255'],

@@ -196,7 +196,7 @@
                         </button>
                         <div class="absolute z-50 hidden ltr:text-left rtl:text-right bg-white rounded-md shadow-md !top-4 dropdown-menu min-w-[20rem] lg:min-w-[26rem] dark:bg-zink-600"
                             aria-labelledby="notificationDropdown">
-                            <div class="p-4">
+                            {{-- <div class="p-4">
                                 <h6 class="mb-4 text-16">Notifications <span
                                         class="inline-flex items-center justify-center w-5 h-5 ml-1 text-[11px] font-medium border rounded-full text-white bg-orange-500 border-orange-500">15</span>
                                 </h6>
@@ -325,7 +325,7 @@
                                         All Notification <i data-lucide="move-right"
                                             class="inline-block w-3.5 h-3.5 ml-1"></i></button>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
 
@@ -379,13 +379,13 @@
                                         href="{{ route('profile.show') }}"><i data-lucide="user-2"
                                             class="inline-block size-4 ltr:mr-2 rtl:ml-2"></i> Profile</a>
                                 </li>
-                                @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
+                                {{-- @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
                                     <li>
                                         <a class="block ltr:pr-4 rtl:pl-4 py-1.5 text-base font-medium transition-all duration-200 ease-linear text-slate-600 dropdown-item hover:text-custom-500 focus:text-custom-500 dark:text-zink-200 dark:hover:text-custom-500 dark:focus:text-custom-500"
                                             href="{{ route('api-tokens.index') }}"><i data-lucide="key-round"
                                                 class="inline-block size-4 ltr:mr-2 rtl:ml-2"></i> API Tokens</a>
                                     </li>
-                                @endif
+                                @endif --}}
                                 <!-- Logout -->
                                 <li class="pt-2 mt-2 border-t border-slate-200 dark:border-zink-500">
                                     <form method="POST" action="{{ route('logout') }}" x-data>

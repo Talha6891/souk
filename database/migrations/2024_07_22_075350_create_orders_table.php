@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('order_name', 255);
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->string('custom_order_id')->unique();
+            $table->enum('status', ['pending','processing','delivered','cancelled','refunded','returned'])->default('pending');
             $table->string('customer_name', 255);
             $table->string('email', 255);
             $table->string('contact_no', 15);
@@ -27,6 +28,7 @@ return new class extends Migration
             $table->string('product_id')->nullable();
             // $table->foreignId('product_id')->constrained('products')->onDelete('cascade');
             $table->foreignId('warehouse_id')->nullable()->constrained('warehouses')->cascadeOnDelete();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

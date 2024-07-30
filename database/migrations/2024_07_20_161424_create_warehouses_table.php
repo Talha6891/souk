@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('warehouses', function (Blueprint $table) {
             $table->id();
             $table->string('name',100);
+            $table->string('email', 255)->unique();
             $table->string('contact_no',15)->unique();
             $table->tinyText('address');
             $table->string('city',100);

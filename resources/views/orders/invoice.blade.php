@@ -106,28 +106,20 @@
                     <table>
                         <tr>
                             <td>
-                                {{ $order->user->store_name }}<br />
-                                {{ $order->user->address }}<br />
-                                {{ $order->user->city }}, {{ $order->user->country->name }}
-                            </td>
-                            <td>
                                 {{ $order->customer_name }}<br />
                                 {{ $order->email }}<br />
-                                {{ $order->contact_no }}
+                                {{ $order->contact_no }}<br />
+                                {{ $order->shipping_address }}<br />
+                                {{ $order->city }}, {{ $order->country->name }}
+                            </td>
+                            <td>
+                                Order Name: {{ $order->order_name }}<br />
+                                Status: {{ ucfirst($order->status) }}<br />
+                                Quantity: {{ $order->quantity }}
                             </td>
                         </tr>
                     </table>
                 </td>
-            </tr>
-
-            <tr class="heading">
-                <td>Payment Method</td>
-                <td>Check #</td>
-            </tr>
-
-            <tr class="details">
-                <td>Check</td>
-                <td>1000</td>
             </tr>
 
             <tr class="heading">

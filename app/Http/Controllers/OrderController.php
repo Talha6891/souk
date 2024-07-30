@@ -36,9 +36,14 @@ class OrderController extends Controller
         $q = $request->get('q');
         $perPage = $request->get('per_page', 10);
         $sort = $request->get('sort');
+        $status = $request->get('status', 'all');
 
-        $orders = QueryBuilder::for(Order::class)
-            ->allowedSorts(['order_name', 'custom_order_id', 'customer_name', 'email', 'contact_no', 'city', 'quantity', 'total_price', 'country_id'])
+        $ordersQuery = QueryBuilder::for(Order::class)
+            ->allowedSorts([
+                'order_name', 'status', 'custom_order_id', 'customer_name',
+                'email', 'contact_no', 'city', 'quantity', 'total_price',
+                'country_id'
+            ])
             ->where(function ($query) use ($q) {
                 $query->where('custom_order_id', 'like', "%$q%")
                     ->orWhere('order_name', 'like', "%$q%")
@@ -47,15 +52,24 @@ class OrderController extends Controller
                     ->orWhere('contact_no', 'like', "%$q%")
                     ->orWhere('city', 'like', "%$q%")
                     ->orWhere('shipping_address', 'like', "%$q%");
-            })
+            });
+
+        if ($status !== 'all') {
+            $ordersQuery->where('status', $status);
+        }
+
+        $orders = $ordersQuery
             ->with('country')
             ->with('warehouse')
             ->latest()
             ->paginate($perPage)
-            ->appends(['per_page' => $perPage, 'q' => $q, 'sort' => $sort]);
+            ->appends(['per_page' => $perPage, 'q' => $q, 'sort' => $sort, 'status' => $status]);
+
         $warehouses = Warehouse::all();
-        return view('orders.index', compact('orders', 'warehouses', 'breadcrumbs'));
+
+        return view('orders.index', compact('orders', 'warehouses', 'breadcrumbs', 'status'));
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -76,23 +90,33 @@ class OrderController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+
     public function store(StoreOrderRequest $request): RedirectResponse
     {
         Order::create($request->validated());
 
-        return to_route('orders.index')->with('message', 'Order created successfully.');
+        if (auth()->user()->hasRole('client')) {
+            return redirect()->route('dashboard')->with('message', 'Order created successfully.');
+        }
+
+        return redirect()->route('orders.index')->with('message', 'Order created successfully.');
     }
+
+
 
     /**
      * Display the specified resource.
      */
     public function show(Order $order): View
     {
+        $order->load('country', 'user.client');
+
         $breadcrumbs = [
             ['url' => route('dashboard'), 'title' => 'Home'],
-            ['url' => route('orders.index'), 'title' => 'Order Show'],
+            ['url' => route('orders.index'), 'title' => 'Orders'],
+            ['url' => route('orders.show', ['order' => $order->id]), 'title' => 'Order Show'],
         ];
-        $order->load('country', 'user');
+
         return view('orders.show', compact('breadcrumbs', 'order'));
     }
 
@@ -158,6 +182,4 @@ class OrderController extends Controller
 
         return $dompdf->stream('invoice.pdf');
     }
-
-
 }

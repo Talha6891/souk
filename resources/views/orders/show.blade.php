@@ -64,12 +64,13 @@
                 <h6 class="my-5 mt-6 underline text-16">Order(s) Info:</h6>
                 <div class="grid grid-cols-1 gap-5 mt-3 xl:grid-cols-12">
 
+
+                    {{--  order_id --}}
                     <div class="xl:col-span-3">
-                        <label for="user_id" class="inline-block mb-2 text-base font-medium">Store Name</label>
-                        <input type="text" id="user_id" name="user_id"
+                        <label for="order_id" class="inline-block mb-2 text-base font-medium">Order ID</label>
+                        <input type="text" id="order_id" name="order_id"
                             class="form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200"
-                            placeholder="Enter custom order id" value="{{ old('order_id', $order->user->store_name) }}"
-                            readonly>
+                            placeholder="Enter custom order id" value="{{ old('order_id', $order->id) }}" readonly>
                     </div>
 
                     <div class="xl:col-span-3">
@@ -79,14 +80,7 @@
                             value="{{ old('order_name', $order->order_name) }}" readonly>
                     </div>
 
-                    {{--  order_id --}}
-                    <div class="xl:col-span-3">
-                        <label for="order_id" class="inline-block mb-2 text-base font-medium">Order ID</label>
-                        <input type="text" id="order_id" name="order_id"
-                            class="form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200"
-                            placeholder="Enter custom order id" value="{{ old('order_id', $order->id) }}" readonly>
-                    </div>
-                    {{-- customer_name --}}
+                    {{-- custom_name --}}
                     <div class="xl:col-span-3">
                         <label for="custom_order_id" class="inline-block mb-2 text-base font-medium">Custom Order Id</label>
                         <input type="text" id="custom_order_id" name="custom_order_id"
@@ -115,7 +109,7 @@
                     <a href="{{ route('orders.index') }}"
                         class="text-slate-500 btn bg-slate-200 border-slate-200 hover:text-slate-600 hover:bg-slate-300 hover:border-slate-300 focus:text-slate-600 focus:bg-slate-300 focus:border-slate-300 focus:ring focus:ring-slate-100 active:text-slate-600 active:bg-slate-300 active:border-slate-300 active:ring active:ring-slate-100 dark:bg-zink-600 dark:hover:bg-zink-500 dark:border-zink-600 dark:hover:border-zink-500 dark:text-zink-200 dark:ring-zink-400/50"><i
                             data-lucide="arrow-left" class="inline-block mr-1 size-4"></i> <span
-                            class="align-middle">Reset</span></a>
+                            class="align-middle">Back</span></a>
 
                     <a href="{{ route('orders.invoice', $order->id) }}"
                         class="text-white bg-green-500 border-green-500 btn hover:text-white hover:bg-green-600 hover:border-green-600 focus:text-white focus:bg-green-600 focus:border-green-600 focus:ring focus:ring-green-100 active:text-white active:bg-green-600 active:border-green-600 active:ring active:ring-green-100 dark:ring-green-400/10">

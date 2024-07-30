@@ -24,6 +24,7 @@ class StoreOrderRequest extends FormRequest
     {
         return [
             'order_name' => ['required', 'string', 'max:255'],
+            'status' => ['required','in:pending,processing,delivered,cancelled,refunded,returned'],
             'user_id' => ['required', 'exists:users,id'],
             'custom_order_id' => ['required', 'string', 'unique:orders'],
             'customer_name' => ['required', 'string', 'max:255'],

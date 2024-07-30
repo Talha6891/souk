@@ -12,9 +12,9 @@ class Country extends Model
 
     protected $fillable  = ['name','code','num_code'];
 
-    public function users() : HasMany
+    public function clients() : HasMany
     {
-        return $this->hasMany(User::class);
+        return $this->hasMany(Client::class);
     }
 
     public function warehouses() : HasMany

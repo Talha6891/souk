@@ -18,7 +18,8 @@ class RoleSeeder extends Seeder
         $roles = [
             'super-admin',
             'admin',
-            'user',
+            'client',
+            'supervisor'
         ];
         foreach ($roles as $role) {
             Role::create([
@@ -54,15 +55,34 @@ class RoleSeeder extends Seeder
             'menu database_backup',
         ]);
 
-        $userSanctum = Role::where(['name' => 'user', 'guard_name' => 'sanctum'])->firstOrFail();
+        $userSanctum = Role::where(['name' => 'supervisor', 'guard_name' => 'sanctum'])->firstOrFail();
         $userSanctum->givePermissionTo([
+
+            'warehouse-order-status-update',
             // user
-            'user index',
-            'user update',
-            'user show',
-            //menu
-            'menu users_list',
+            // 'user index',
+            // 'user update',
+            // 'user show',
+            // //menu
+            // 'menu users_list',
+        ]);
+
+        $supervisorSanctum = Role::where(['name' => 'client', 'guard_name' => 'sanctum'])->firstOrFail();
+        $supervisorSanctum->givePermissionTo([
+
+            'order create',
+            'order show',
+            // 'order update',
+            // user
+            // 'user index',
+            // 'user update',
+            // 'user show',
+            //warehouse
+            // 'warehouse index',
+            // 'warehouse create',
+            // 'warehouse update',
+            // 'warehouse delete',
+            // 'warehouse show',
         ]);
     }
-
 }

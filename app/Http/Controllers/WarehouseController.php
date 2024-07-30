@@ -34,9 +34,10 @@ class WarehouseController extends Controller
         $sort = $request->get('sort');
 
         $warehouses = QueryBuilder::for(Warehouse::class)
-            ->allowedSorts(['name', 'contact_no','city','address', 'user_id', 'country_id'])
+            ->allowedSorts(['name','email','contact_no','city','address', 'user_id', 'country_id'])
             ->where(function ($query) use ($q) {
                 $query->where('name', 'like', "%$q%")
+                    ->orWhere('email', 'like', "%$q%")
                     ->orWhere('contact_no', 'like', "%$q%")
                     ->orWhere('address', 'like', "%$q%")
                     ->orWhere('city', 'like', "%$q%")
@@ -63,11 +64,7 @@ class WarehouseController extends Controller
             ['url' => route('warehouses.index'), 'title' => 'Warehouses'],
         ];
 
-        $user = auth()->user();
-        $users = $user->hasRole('super-admin') ? User::all() : User::whereDoesntHave('roles', function ($query) {
-            $query->where('name', 'super-admin');
-        })->get();
-
+        $users = User::role('supervisor')->get();
         $countries = Country::all();
 
         return view('warehouses.create', compact('breadcrumbs', 'users', 'countries'));
@@ -108,10 +105,7 @@ class WarehouseController extends Controller
             ['url' => route('warehouses.index'), 'title' => 'Warehouses'],
         ];
         $warehouse->load('user', 'country');
-        $user = auth()->user();
-        $users = $user->hasRole('super-admin') ? User::all() : User::whereDoesntHave('roles', function ($query) {
-            $query->where('name', 'super-admin');
-        })->get();
+        $users = User::role('supervisor')->get();
         $countries = Country::all();
 
         return view('warehouses.edit', compact('breadcrumbs','warehouse','users','countries'));

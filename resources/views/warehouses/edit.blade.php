@@ -22,11 +22,23 @@
                                 class="text-red-500">*</span></label>
                         <input type="text" id="name" name="name"
                                class="form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200"
-                               placeholder="Enter WarehouseName" value="{{ old('name', $warehouse->name) }}" required>
+                               placeholder="Enter Warehouse Name" value="{{ old('name', $warehouse->name) }}" required>
                         <x-input-error for="name" />
 
                     </div>
                     {{-- name end --}}
+
+                    {{-- email --}}
+                    <div class="mb-4">
+                        <label for="email" class="inline-block mb-2 text-base font-medium">{{ __('Email') }} <span
+                                class="text-red-500">*</span></label>
+                        <input type="email" id="email" name="email"
+                               class="form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200"
+                               placeholder="Enter Email" value="{{ old('email', $warehouse->email) }}" required>
+                        <x-input-error for="email" />
+
+                    </div>
+                    {{-- email end --}}
 
                     {{-- contact_no  --}}
                     <div class="mb-4">
@@ -38,17 +50,6 @@
                         <x-input-error for="contact_no" />
                     </div>
                     {{--  contact_no end  --}}
-
-                    {{-- address --}}
-                    <div class="mb-4">
-                        <label for="address" class="inline-block mb-2 text-base font-medium">{{ __('Address') }}<span
-                                class="text-red-500">*</span></label>
-                        <textarea id="address" name="address"
-                                  class="form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200"
-                                  placeholder="Enter Address" required>{{ old('address', $warehouse->address) }}</textarea>
-                        <x-input-error for="address" />
-                    </div>
-                    {{-- address end --}}
 
                     {{-- city --}}
                     <div class="mb-4">
@@ -95,6 +96,17 @@
                         <x-input-error for="country_id" />
                     </div>
                     {{--  country end --}}
+
+                     {{-- address --}}
+                     <div class="mb-4">
+                        <label for="address" class="inline-block mb-2 text-base font-medium">{{ __('Address') }}<span
+                                class="text-red-500">*</span></label>
+                        <textarea id="address" name="address"
+                                  class="form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200"
+                                  placeholder="Enter Address" required>{{ old('address', $warehouse->address) }}</textarea>
+                        <x-input-error for="address" />
+                    </div>
+                    {{-- address end --}}
 
                 </div>
                 @can('warehouse update')

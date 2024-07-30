@@ -7,7 +7,6 @@ use App\Models\Order;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\View\View;
 use Maatwebsite\Excel\Exceptions\LaravelExcelException;
 use Maatwebsite\Excel\Facades\Excel;

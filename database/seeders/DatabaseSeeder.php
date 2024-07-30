@@ -18,6 +18,8 @@ class DatabaseSeeder extends Seeder
         CountrySeeder::class,
         PermissionSeeder::class,
         RoleSeeder::class,
+        DepartmentSeeder::class,
+        DesignationSeeder::class,
         UserSeeder::class,
       ]);
     }

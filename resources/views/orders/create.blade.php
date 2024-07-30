@@ -25,7 +25,7 @@
                                 <option value="">{{ __('Select User') }}</option>
                                 @foreach ($users as $user)
                                     <option value="{{ $user->id }}">
-                                        {{ $user->first_name.' '.$user->last_name }}
+                                        {{ $user->first_name . ' ' . $user->last_name }}
                                     </option>
                                 @endforeach
                             </select>
@@ -37,40 +37,63 @@
                         <div class="mb-4">
                             <label for="user_id" class="inline-block mb-2 text-base font-medium">{{ __('User Name') }}
                                 <span class="text-red-500">*</span></label>
-                            <input type="text" id="user_id" name="user_id"
+                                <input type="text" id="user_id_display"
                                 class="form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200"
                                 placeholder="Enter Name"
-                                value="{{ old('user_id', $users->first_name . ' ' . $user->last_name) }}" disabled>
+                                value="{{ old('user_id', $users->first_name . ' ' . $users->last_name) }}" disabled>
+
+                         <!-- Hidden input field to ensure user_id is submitted -->
+                         <input type="hidden" name="user_id" value="{{ $users->id }}">
+    
                             <x-input-error for="user_id" />
 
                         </div>
                         {{-- user_id end --}}
                     @endif
 
-                        {{-- order_name --}}
-                        <div class="mb-4">
-                            <label for="order_name"
-                                   class="inline-block mb-2 text-base font-medium">{{ __('Order Name') }}<span
-                                    class="text-red-500">*</span></label>
-                            <input type="text" id="order_name" name="order_name"
-                                   class="form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200"
-                                   placeholder="Enter Order Name" value="{{ old('order_name') }}" >
-                            <x-input-error for="order_name" />
-                        </div>
-                        {{-- order_name end --}}
+                    {{-- order_name --}}
+                    <div class="mb-4">
+                        <label for="order_name" class="inline-block mb-2 text-base font-medium">{{ __('Order Name') }}<span
+                                class="text-red-500">*</span></label>
+                        <input type="text" id="order_name" name="order_name"
+                            class="form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200"
+                            placeholder="Enter Order Name" value="{{ old('order_name') }}">
+                        <x-input-error for="order_name" />
+                    </div>
+                    {{-- order_name end --}}
 
-                        {{-- product_id --}}
-                        <div class="mb-4">
-                            <label for="product_id"
-                                   class="inline-block mb-2 text-base font-medium">{{ __('Product') }}</label>
-                            <input type="text" id="product_id" name="product_id"
-                                   class="form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200"
-                                   placeholder="Enter Product ID" value="{{ old('product_id') }}" >
-                            <x-input-error for="custom_order_id" />
-                        </div>
-                        {{-- product_id end --}}
+                    {{-- status --}}
+                    <div class="mb-4">
+                        <label for="status" class="inline-block mb-2 text-base font-medium">{{ __('Status') }}<span
+                                class="text-red-500">*</span></label>
+                        <select id="status" name="status"
+                            class="form-select border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200">
+                            <option value="pending" {{ old('status') === 'pending' ? 'selected' : '' }}>Pending</option>
+                            <option value="processing" {{ old('status') === 'processing' ? 'selected' : '' }}>Processing
+                            </option>
+                            <option value="delivered" {{ old('status') === 'delivered' ? 'selected' : '' }}>Delivered
+                            </option>
+                            <option value="cancelled" {{ old('status') === 'cancelled' ? 'selected' : '' }}>Cancelled
+                            </option>
+                            <option value="refunded" {{ old('status') === 'refunded' ? 'selected' : '' }}>Refunded</option>
+                            <option value="returned" {{ old('status') === 'returned' ? 'selected' : '' }}>Returned</option>
+                        </select>
+                        <x-input-error for="status" />
+                    </div>
+                    {{-- status end --}}
 
-                        {{-- custom_order_id --}}
+
+                    {{-- product_id --}}
+                    <div class="mb-4">
+                        <label for="product_id" class="inline-block mb-2 text-base font-medium">{{ __('Product') }}</label>
+                        <input type="text" id="product_id" name="product_id"
+                            class="form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200"
+                            placeholder="Enter Product ID" value="{{ old('product_id') }}">
+                        <x-input-error for="custom_order_id" />
+                    </div>
+                    {{-- product_id end --}}
+
+                    {{-- custom_order_id --}}
                     <div class="mb-4">
                         <label for="custom_order_id"
                             class="inline-block mb-2 text-base font-medium">{{ __('Custom Order ID') }}<span
@@ -111,8 +134,8 @@
                                 class="text-red-500">*</span></label>
                         <input type="text" id="contact_no" name="contact_no"
                             class="form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200"
-                            minlength="10" maxlength="15" placeholder="Enter Contact No" value="{{ old('contact_no') }}"
-                            required>
+                            minlength="10" maxlength="15" placeholder="Enter Contact No"
+                            value="{{ old('contact_no') }}" required>
                         <x-input-error for="contact_no" />
                     </div>
                     {{-- contact_no end --}}
@@ -170,20 +193,20 @@
                     </div>
                     {{-- total_price end --}}
 
-                        {{-- shipping_address --}}
-                        <div class="mb-4">
-                            <label for="shipping_address"
-                                   class="inline-block mb-2 text-base font-medium">{{ __('Shipping Address') }}<span
-                                    class="text-red-500">*</span></label>
-                            <textarea id="shipping_address" name="shipping_address"
-                                      class="form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200"
-                                      placeholder="Enter Shipping Address" required>{{ old('shipping_address') }}</textarea>
-                            <x-input-error for="shipping_address" />
-                        </div>
-                        {{-- shipping_address end --}}
+                    {{-- shipping_address --}}
+                    <div class="mb-4">
+                        <label for="shipping_address"
+                            class="inline-block mb-2 text-base font-medium">{{ __('Shipping Address') }}<span
+                                class="text-red-500">*</span></label>
+                        <textarea id="shipping_address" name="shipping_address"
+                            class="form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200"
+                            placeholder="Enter Shipping Address" required>{{ old('shipping_address') }}</textarea>
+                        <x-input-error for="shipping_address" />
+                    </div>
+                    {{-- shipping_address end --}}
 
                 </div>
-                @can('user create')
+                @can('order create')
                     <div class="flex justify-end gap-2">
                         <a href="{{ route('users.index') }}"
                             class="text-red-500 bg-white btn hover:text-red-500 hover:bg-red-100 focus:text-red-500 focus:bg-red-100 active:text-red-500 active:bg-red-100 dark:bg-zink-700 dark:hover:bg-red-500/10 dark:focus:bg-red-500/10 dark:active:bg-red-500/10">

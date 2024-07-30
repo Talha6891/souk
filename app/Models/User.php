@@ -30,17 +30,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'last_name',
         'email',
         'password',
-        'whatsapp_no',
-        'city',
-        'address',
-        'bank_name',
-        'branch_code',
-        'store_name',
-        'account_title',
-        'iban_number',
         'referral_code',
-        'country_id',
-        'verified'
     ];
 
     /**
@@ -88,10 +78,14 @@ class User extends Authenticatable implements MustVerifyEmail
         return $query->where('id', '!=', 1);
     }
 
-    // Define the relationship with the Country model
-    public function country(): BelongsTo
+    public function client(): HasOne
     {
-        return $this->belongsTo(Country::class);
+        return $this->hasOne(Client::class);
+    }
+
+    public function employee(): HasOne
+    {
+        return $this->hasOne(Employee::class);
     }
 
     public function warehouse(): HasOne
@@ -99,7 +93,7 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasOne(Warehouse::class);
     }
 
-    public function orders() : HasMany
+    public function orders(): HasMany
     {
         return $this->hasMany(Order::class);
     }

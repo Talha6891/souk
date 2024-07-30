@@ -12,7 +12,7 @@ class Warehouse extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = ['name','contact_no','city','address','user_id','country_id'];
+    protected $fillable = ['name','email','contact_no','city','address','user_id','country_id'];
 
     public function user() : BelongsTo
     {

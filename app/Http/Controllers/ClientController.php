@@ -45,6 +45,7 @@ class ClientController extends Controller
                     ->orWhere('city', 'like', "%$q%");
             })
             ->with('country')
+            ->with('user')
             ->latest()
             ->paginate($perPage)
             ->appends(['per_page' => $perPage, 'q' => $q, 'sort' => $sort]);

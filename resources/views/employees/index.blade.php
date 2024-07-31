@@ -47,7 +47,7 @@
         <thead class="bg-slate-100 dark:bg-zink-600 ">
             <tr>
                 <th class="sort px-3.5 py-2.5 font-semibold border-b border-slate-200 dark:border-zink-500 ltr:text-left rtl:text-right"
-                    >#ID
+                    >User #ID
                 </th>
                 <th class="sort px-3.5 py-2.5 font-semibold border-b border-slate-200 dark:border-zink-500 ltr:text-left rtl:text-right"
                     data-sort="name">Name
@@ -78,7 +78,7 @@
             @forelse($employees as $employee)
                 <tr>
                     <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500">
-                        {{ Str::limit($employee->id, 20) }}
+                        {{ Str::limit($employee->user->id, 20) }}
                     </td>
                     <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500">
                         {{ Str::limit($employee->first_name . ' ' . $employee->last_name ?? ' ', 20) }}
@@ -86,7 +86,7 @@
                     <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500">
                         {{ Str::limit($employee->email, 20) }}
                     </td>
-                   
+
                     <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500">
                         {{ $employee->joining_date->format('d M Y') }}
                     </td>

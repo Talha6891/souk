@@ -47,13 +47,14 @@ public function index(Request $request): View
                 ->orWhereDate('dob', 'like', "%$q%")
                 ->orWhereDate('joining_date', 'like', "%$q%");
         })
-        ->with(['department', 'designation']) // Use array syntax for eager loading
+        ->with(['department', 'designation'])
+        ->with('user')
         ->when(!$user->hasRole('super-admin'), function (Builder $query) {
             $query->whereDoesntHave('roles', function (Builder $query) {
                 $query->where('name', 'super-admin');
             });
         })
-        ->where('user_id', '!=', $user->id) // Exclude authenticated user
+        ->where('user_id', '!=', $user->id)
         ->latest()
         ->paginate($perPage)
         ->appends(['per_page' => $perPage, 'q' => $q, 'sort' => $sort]);
@@ -102,7 +103,7 @@ public function index(Request $request): View
 
         $user->assignRole($role);
         $user->sendEmailVerificationNotification();
-        
+
         return to_route('employees.index')->with('message', 'employee Created Successfully');
     }
 

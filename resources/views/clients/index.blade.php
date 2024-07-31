@@ -47,6 +47,9 @@
                     <thead class="bg-slate-100 dark:bg-zink-600 ">
                         <tr>
                             <th class="sort px-3.5 py-2.5 font-semibold border-b border-slate-200 dark:border-zink-500 ltr:text-left rtl:text-right"
+                                data-sort="first_name">User #ID
+                            </th>
+                            <th class="sort px-3.5 py-2.5 font-semibold border-b border-slate-200 dark:border-zink-500 ltr:text-left rtl:text-right"
                                 data-sort="first_name">Name
                             </th>
                             <th class="sort px-3.5 py-2.5 font-semibold border-b border-slate-200 dark:border-zink-500 ltr:text-left rtl:text-right"
@@ -74,6 +77,8 @@
                     <tbody class="list form-check-all">
                         @forelse($clients as $client)
                             <tr>
+                                <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 first_name">
+                                    {{ Str::limit($client->user->id, 20) }}</td>
                                 <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 first_name">
                                     {{ Str::limit($client->first_name . ' ' . $client->last_name ?? ' ', 20) }}</td>
                                 <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 email">

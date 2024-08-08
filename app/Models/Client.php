@@ -25,7 +25,8 @@ class Client extends Model
         'iban_number',
         'verified',
         'country_id',
-        'user_id'
+        'user_id',
+        'client_type'
     ];
 
     public function scopeWithoutAuthUser($query): mixed

@@ -84,13 +84,13 @@
                     {{-- bank_name end --}}
 
                     {{-- branch_code --}}
-                    <div class="mb-4">
+                    {{-- <div class="mb-4">
                         <label for="branch_code" class="inline-block mb-2 text-base font-medium">{{ __('Branch Code') }}<span
                                 class="text-red-500">*</span></label>
                         <input type="text" id="branch_code" name="branch_code"
                                class="form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200"
                                value="{{ old('branch_code', $client->branch_code) }}" readonly>
-                    </div>
+                    </div> --}}
                     {{-- branch_code end --}}
 
                     {{-- account_title --}}
@@ -123,6 +123,14 @@
                     </div>
                     {{-- store_name end --}}
 
+                    <div class="mb-4">
+                        <label for="client_type" class="inline-block mb-2 text-base font-medium">{{ __('Type') }}<span
+                                class="text-red-500">*</span></label>
+                        <input type="text" id="client_type" name="client_type"
+                               class="form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200"
+                               value="{{ old('client_type', $client->client_type) }}" required>
+                    </div>
+
                     {{--  referral_code --}}
                     <div class="mb-4">
                         <label for="referral_code" class="inline-block mb-2 text-base font-medium">{{ __(' Referral Code') }}</label>
@@ -134,7 +142,7 @@
 
                     {{--  role --}}
                     <div class="mb-4">
-                        <label for="role_id" class="inline-block mb-2 text-base font-medium">{{ __('client Role') }}</label>
+                        <label for="role_id" class="inline-block mb-2 text-base font-medium">{{ __('Client Role') }}</label>
                         <input type="text" id="role_id" name="role_id"
                                class="form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200"
                                value="{{ old(' role_id', 'Client') }}" readonly>
@@ -144,7 +152,7 @@
 
                     {{--  country --}}
                     <div class="mb-4">
-                        <label for="country_id" class="inline-block mb-2 text-base font-medium">{{ __('client Country') }}</label>
+                        <label for="country_id" class="inline-block mb-2 text-base font-medium">{{ __('Client Country') }}</label>
                         <input type="text" id="country_id" name="country_id"
                                class="form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200"
                                value="{{ old(' country_id', $client->country->name) }}" readonly>

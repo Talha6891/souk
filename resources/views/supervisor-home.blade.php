@@ -138,6 +138,4 @@
 <script src="{{ URL::asset('build/libs/sweetalert2/sweetalert2.min.js') }}"></script>
 <!-- App js -->
 <script src="{{ URL::asset('build/js/app.js') }}"></script>
-
-
 @endpush

@@ -32,12 +32,13 @@ class UpdateClientRequest extends FormRequest
             'city' => ['required', 'string', 'min:1', 'max:100'],
             'address' => ['required', 'string', 'min:1', 'max:255'],
             'bank_name' => ['required', 'string', 'min:1', 'max:100'],
-            'branch_code' => ['required', 'string', 'min:1', 'max:20'],
+            // 'branch_code' => ['required', 'string', 'min:1', 'max:20'],
             'store_name' => ['required', 'string', 'min:1', 'max:100'],
             'account_title' => ['required', 'string', 'min:1', 'max:100'],
             'iban_number' => ['required', 'string', 'min:15', 'max:34'],
             'referral_code' => ['nullable', 'string', 'max:50'],
             'country_id' => ['required', 'exists:countries,id'],
+            'client_type' => ['required', 'in:individual,agency'],
             'role_id' => ['required', 'exists:roles,id'],
             'verified' => ['nullable', 'boolean']
         ];

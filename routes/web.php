@@ -63,6 +63,10 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
         ->get('order_import', [ImportExportOrderController::class, 'show'])->name('orders.import');
     Route::middleware('can:order import_file')
         ->post('order_import_store', [ImportExportOrderController::class, 'store'])->name('orders.import.store');
+        // download sample
+        // routes/web.php
+Route::get('sample-format', [ ImportExportOrderController::class, 'downloadSample'])->name('sample.format.download');
 
-    Route::get("{any}", [RouteController::class, 'routes']);
+
+    // Route::get("{any}", [RouteController::class, 'routes']);
 });

@@ -16,12 +16,13 @@ return new class extends Migration
         $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
         $table->string('first_name', 100);
         $table->string('last_name', 100)->nullable();
+        $table->enum('client_type',['individual','agency']);
         $table->string('email', 255)->unique();
         $table->string('whatsapp_no', 15)->unique();
         $table->string('city', 100);
         $table->string('address', 255);
         $table->string('bank_name', 100);
-        $table->string('branch_code', 20);
+        $table->string('branch_code', 20)->nullable();
         $table->string('store_name', 100);
         $table->string('account_title', 100);
         $table->string('iban_number', 40);

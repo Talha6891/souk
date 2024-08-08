@@ -94,14 +94,14 @@
                     {{-- bank_name end --}}
 
                     {{-- branch_code --}}
-                    <div class="mb-4">
+                    {{-- <div class="mb-4">
                         <label for="branch_code" class="inline-block mb-2 text-base font-medium">{{ __('Branch Code') }}<span
                                 class="text-red-500">*</span></label>
                         <input type="text" id="branch_code" name="branch_code"
                                class="form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200"
                                placeholder="Enter branch code" value="{{ old('branch_code',$client->branch_code) }}" required>
                         <x-input-error for="branch_code" />
-                    </div>
+                    </div> --}}
                     {{-- branch_code end --}}
 
                     {{-- account_title --}}
@@ -136,6 +136,22 @@
                         <x-input-error for="store_name" />
                     </div>
                     {{-- store_name end --}}
+
+                    <div class="mb-4">
+                        <label for="client_type" class="inline-block mb-2 text-base font-medium">{{ __('Select Client Type') }}<span class="text-red-500">*</span></label>
+
+                        <select id="client_type" name="client_type" class="form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200">
+                            <option value="">{{ __('Select Client Type') }}</option>
+                            <option value="individual" {{ old('client_type', $client->client_type) === 'individual' ? 'selected' : '' }}>
+                                {{ __('Individual') }}
+                            </option>
+                            <option value="agency" {{ old('client_type', $client->client_type) === 'agency' ? 'selected' : '' }}>
+                                {{ __('Agency') }}
+                            </option>
+                        </select>
+                        <x-input-error for="client_type" />
+                    </div>
+
 
                     {{--  referral_code --}}
                     <div class="mb-4">

@@ -21,6 +21,7 @@ class OrdersImport implements ToModel, WithHeadingRow
         $userId = $user->hasRole('super-admin') ? $row['user_id'] : $user->id;
 
         return new Order([
+            'order_name' => $row['order_name'],
             'user_id' => $userId,
             'custom_order_id' => $row['custom_order_id'],
             'customer_name' => $row['customer_name'],

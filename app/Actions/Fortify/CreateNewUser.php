@@ -30,11 +30,12 @@ class CreateNewUser implements CreatesNewUsers
             'city' => ['required', 'string', 'min:1', 'max:100'],
             'address' => ['required', 'string', 'min:1', 'max:255'],
             'bank_name' => ['required', 'string', 'min:1', 'max:100'],
-            'branch_code' => ['required', 'string', 'min:1', 'max:20'],
+            // 'branch_code' => ['required', 'string', 'min:1', 'max:20'],
             'store_name' => ['required', 'string', 'min:1', 'max:100'],
             'account_title' => ['required', 'string', 'min:1', 'max:100'],
             'iban_number' => ['required', 'string', 'min:15', 'max:34'],
             'referral_code' => ['nullable', 'string', 'max:50'],
+            'client_type' => ['required', 'in:individual,agency'],
             'country_id' => ['required', 'exists:countries,id'],
             'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['accepted', 'required'] : '',
         ])->validate();
@@ -56,10 +57,11 @@ class CreateNewUser implements CreatesNewUsers
                 'city' => $input['city'],
                 'address' => $input['address'],
                 'bank_name' => $input['bank_name'],
-                'branch_code' => $input['branch_code'],
+                // 'branch_code' => $input['branch_code'],
                 'store_name' => $input['store_name'],
                 'account_title' => $input['account_title'],
                 'iban_number' => $input['iban_number'],
+                'client_type' => $input['client_type'],
                 'country_id' => $input['country_id'],
                 'user_id' => $user->id
             ]);

@@ -41,7 +41,7 @@
                                     <div class="mb-3">
                                         <x-label for="email" value="{{ __('Email') }}" />
                                         <x-input id="email" type="email" name="email" :value="old('email')" required
-                                            autocomplete="username" value placeholder="Enter valid email" />
+                                            autocomplete="username" placeholder="Enter valid email" />
                                         <x-input-error for="email" />
                                     </div>
 
@@ -92,12 +92,29 @@
                                         <x-input-error for="bank_name" />
                                     </div>
 
-                                    <div class="mb-3">
+                                    {{-- <div class="mb-3">
                                         <x-label for="branch_code" value="{{ __('Branch Code') }}" />
                                         <x-input id="branch_code" type="text" name="branch_code" :value="old('branch_code')"
                                             required placeholder="Enter branch code" />
                                         <x-input-error for="branch_code" />
+                                    </div> --}}
+
+                                    <div class="relative mb-3">
+                                        <x-label for="client_type" value="{{ __('Type') }}" />
+                                        <div class="mb-3">
+                                            <select id="client_type" name="client_type" class="form-select custom-select">
+                                                <option value="">{{ __('Select Type') }}</option>
+                                                <option value="individual">
+                                                    Individual
+                                                </option>
+                                                <option value="agency">
+                                                    Agency
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <x-input-error for="client_type" />
                                     </div>
+
                                 </div>
 
                                 <div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
@@ -132,12 +149,14 @@
                                             :value="old('referral_code')" placeholder="Enter referral code (optional)" />
                                         <x-input-error for="referral_code" />
                                     </div>
+
                                 </div>
 
                                 @php
                                     $countries = App\Models\Country::all();
                                 @endphp
                                 <div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
+
                                     <div class="relative mb-3">
                                         <x-label for="country_id" value="{{ __('Select Country') }}" />
                                         <div class="mb-3">
@@ -152,6 +171,7 @@
                                             </select>
                                         </div>
                                     </div>
+
                                 </div>
 
 
